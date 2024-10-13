@@ -1,0 +1,19 @@
+# Default values for hello-world-app-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+devnamespace: dev
+helloApplicationName: hello-world-app
+
+helloworldimage: 
+  name: 416591745024.dkr.ecr.eu-west-2.amazonaws.com/personal-demo/hello-world-app
+  tag: "latest"
+
+
+
+helloworldservice: hello-world-app-service
+serviceingress:  hello-world-app-ingress-service
+helloworldappbaseURL : hello-world.globalfrontierlink.co.uk
+
+
+
+replicaCount: 1

@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.serviceingress }}
+  namespace: {{ .Values.devnamespace }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.serviceingress }}
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: {{ .Values.helloworldappbaseURL }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /api/v1
+        backend:
+          service:
+            name: {{ .Values.helloworldservice }}
+            port:
+              number: 8080   # Ensure proper indentation here
+
+  - host: {{ .Values.helloworldappbaseURL }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /healthcheck
+        backend:
+          service:
+            name: {{ .Values.helloworldservice }}
+            port:
+              number: 8080   # Ensure proper indentation here as well

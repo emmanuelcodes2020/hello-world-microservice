@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.helloApplicationName }}
+  namespace: {{ .Values.devnamespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.helloApplicationName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.helloApplicationName }}
+    spec:
+      containers:
+      - name: {{ .Values.helloApplicationName }}
+        image: "{{ .Values.helloworldimage.name }}:{{ .Values.helloworldimage.tag }}"
+        resources: 
+          requests: 
+            memory: "128Mi"
+            cpu: "500m" 
+          limits: 
+            memory: "128Mi" 
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        
